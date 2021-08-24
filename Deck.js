@@ -50,33 +50,26 @@ function run() {
 }
 
 function testFairness(numberOfRuns, numberOfCards) {
-    var table = []
-    for (var i = 0; i < numberOfCards; i++) {
-        var row = []
-        for (var j = 0; j < numberOfCards; j++) {
-            row.push(0)
-        }
-        table.push(row)
-    }
-
+    var pairToOccurrences = {}
     for (var i = 0; i < numberOfRuns; i++) {
         var deck = setupDeck(numberOfCards)
         deck.shuffle()
+        previousCard = null
         for (var j = 0; j < numberOfCards; j++) {
-            var card = deck.get(j)
-            table[j][card]++
+            var currentCard = deck.get(j)
+            if (previousCard != null) {
+                pair = previousCard + "->" + currentCard
+                occurrences = pairToOccurrences[pair] || 0
+                pairToOccurrences[pair] = occurrences + 1
+            }
+            previousCard = currentCard
         }
     }
 
-    for (var i = 0; i < numberOfCards; i++) {
-        var row = ""
-        for (var j = 0; j < numberOfCards; j++) {
-            var entry = "" + table[i][j]
-            if (row != "") {
-                row += ", "
-            }
-            row += entry
-        }
-        console.log("Row #" + i + ": " + row)
+    sortedPairs = Object.keys(pairToOccurrences).sort(function (a, b) {
+        return pairToOccurrences[b] - pairToOccurrences[a]
+    })
+    for (const pair of sortedPairs) {
+        console.log(pair, pairToOccurrences[pair])
     }
 }
