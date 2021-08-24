@@ -50,6 +50,7 @@ function run() {
 function testFairness() {
     numberOfCards = document.getElementById("numberOfCards").value
     numberOfIterations = document.getElementById("numberOfIterations").value
+    document.getElementById("result").value = ""
 
     const pairToOccurrences = {}
     for (var i = 0; i < numberOfIterations; i++) {
