@@ -47,9 +47,13 @@ function run() {
     deck.print()
 }
 
-function testFairness(numberOfRuns, numberOfCards) {
+function testFairness() {
+    numberOfCards = document.getElementById("numberOfCards").value
+    numberOfIterations = document.getElementById("numberOfIterations").value
+    result = document.getElementById("result").value
+
     const pairToOccurrences = {}
-    for (var i = 0; i < numberOfRuns; i++) {
+    for (var i = 0; i < numberOfIterations; i++) {
         const deck = setupDeck(numberOfCards)
         deck.shuffle()
         previousCard = null
@@ -68,6 +72,6 @@ function testFairness(numberOfRuns, numberOfCards) {
         return pairToOccurrences[b] - pairToOccurrences[a]
     })
     for (const pair of sortedPairs) {
-        console.log(pair, pairToOccurrences[pair])
+        document.getElementById("result").value += pair + ", " + pairToOccurrences[pair] + "\n"
     }
 }

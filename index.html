@@ -1,8 +1,19 @@
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>Cards</title>
     <script src="deck.js"></script>
   </head>
   <body>
+    <p>
+      Number of cards:
+      <input type="number" id="numberOfCards" name="numberOfCards" min="1" value="52">
+
+      Number of iterations:
+      <input type="number" id="numberOfIterations" name="numberOfIterations" min="1" value="10000">
+
+      <button onclick="testFairness()">Test fairness</button>
+    </p>
+    <textarea id="result" cols="78" rows="20"></textarea>
   </body>
 </html>
