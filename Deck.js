@@ -71,6 +71,6 @@ function testFairness() {
         return pairToOccurrences[b] - pairToOccurrences[a]
     })
     for (const pair of sortedPairs) {
-        document.getElementById("result").value += pair + ", " + pairToOccurrences[pair] + "\n"
+        document.getElementById("result").value += pair + ": " + pairToOccurrences[pair] + "\n"
     }
 }
