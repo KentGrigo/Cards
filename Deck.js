@@ -14,8 +14,7 @@ Deck.prototype.shuffle = function () {
 }
 
 Deck.prototype.print = function () {
-    for (var i = 0; i < this.cards.length; i++) {
-        var card = this.cards[i]
+    for (const card of this.cards) {
         console.log(card)
     }
 }
@@ -27,36 +26,35 @@ function randomNumberBetween(from, to) {
 }
 
 function swap(collection, index1, index2) {
-    var temp = collection[index1]
+    const temp = collection[index1]
     collection[index1] = collection[index2]
     collection[index2] = temp
 }
 
 function setupDeck(numberOfCards) {
-    var cards = []
+    const cards = []
     for (var i = 0; i < numberOfCards; i++) {
         cards.push(i)
     }
-    var deck = new Deck(cards)
-    return deck
+    return new Deck(cards)
 }
 
 function run() {
-    var numberOfCards = 52
-    var deck = setupDeck(numberOfCards)
+    const numberOfCards = 52
+    const deck = setupDeck(numberOfCards)
     deck.print()
     deck.shuffle()
     deck.print()
 }
 
 function testFairness(numberOfRuns, numberOfCards) {
-    var pairToOccurrences = {}
+    const pairToOccurrences = {}
     for (var i = 0; i < numberOfRuns; i++) {
-        var deck = setupDeck(numberOfCards)
+        const deck = setupDeck(numberOfCards)
         deck.shuffle()
         previousCard = null
-        for (var j = 0; j < numberOfCards; j++) {
-            var currentCard = deck.get(j)
+        for (var cardNumber = 0; cardNumber < numberOfCards; cardNumber++) {
+            var currentCard = deck.get(cardNumber)
             if (previousCard != null) {
                 pair = previousCard + "->" + currentCard
                 occurrences = pairToOccurrences[pair] || 0
